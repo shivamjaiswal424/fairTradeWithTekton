@@ -25,10 +25,10 @@ spec:
               memory: "256Mi"
               cpu: "1000m"
           volumeMounts:
-            - name: sqlite_data
+            - name: sqlite-data
               mountPath: /data  # Path in the container to mount the volume
       volumes:
-        - name: sqlite_data
+        - name: sqlite-data
           persistentVolumeClaim:
             claimName: sqlite-pvc
   # Use an empty directory for SQLite data

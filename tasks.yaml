@@ -3,7 +3,7 @@ kubectl delete pipelinerun fairtrade-pipelinerun
 kubectl delete task clone-task
 kubectl delete task deploy-django-task
 kubectl delete task deploy-flask-ml-task
-ubectl delete pvc sqlite-pvc
+kubectl delete pvc sqlite-pvc
 
 kubectl apply -f pvc.yaml
 kubectl apply -f clone-task.yaml
@@ -20,7 +20,7 @@ tkn pipelinerun describe fairtrade-pipelinerun
 
 tkn pipelinerun logs fairtrade-pipelinerun
 
-tkn taskrun logs fairtrade-pipelinerun-deploy-flask-ml
+tkn taskrun logs fairtrade-pipelinerun-deploy-django
 
 docker system prune -a
 
