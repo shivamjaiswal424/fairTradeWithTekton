@@ -15,6 +15,9 @@ spec:
       containers:
         - name: flask_ml
           image: shivam424/flask:latest  # Your Docker image
+          env:
+            - name: FLASK_APP_HOSTNAME  # Changed to a more descriptive name
+              value: "flask-ml"
           ports:
             - containerPort: 5000  # Port that your application listens on
           resources:
