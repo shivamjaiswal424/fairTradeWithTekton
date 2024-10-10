@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: fairtrade-pipeline
+spec:
+  workspaces:
+    - name: shared-workspace
+  tasks:
+    - name: deploy-flask-ml
+      taskRef:
+        name: deploy-flask-ml-task
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+
+    - name: deploy-django
+      taskRef:
+        name: deploy-django-task
+      runAfter: 
+        - deploy-flask-ml  # Django runs after Flask-ML
+      workspaces:
+        - name: source
+          workspace: shared-workspace
