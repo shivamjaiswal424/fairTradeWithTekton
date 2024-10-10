@@ -6,9 +6,21 @@ spec:
   workspaces:
     - name: shared-workspace
   tasks:
+    - name: clone-repo
+      taskSpec:
+        steps:
+          - name: clone
+            image: alpine/git
+            script: |
+              git clone https://github.com/shivamjaiswal424/fairTradeWithTekton.git /workspace/shared-workspace
+      workspaces:
+        - name: shared-workspace
+
     - name: deploy-flask-ml
       taskRef:
         name: deploy-flask-ml-task
+      runAfter:
+        - clone-repo  # Run after cloning the repo
       workspaces:
         - name: source
           workspace: shared-workspace
