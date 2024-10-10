@@ -21,7 +21,7 @@ tkn pipelinerun describe fairtrade-pipelinerun
 tkn pipelinerun logs fairtrade-pipelinerun
 
 tkn taskrun logs fairtrade-pipelinerun-deploy-django
-
+tkn taskrun logs fairtrade-pipelinerun-clone-repo
 docker system prune -a
 
 minikube ssh -- docker system prune

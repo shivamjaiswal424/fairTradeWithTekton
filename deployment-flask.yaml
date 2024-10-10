@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask_ml
+  name: flask-ml  # Changed from flask_ml to flask-ml
 spec:
-  replicas: 1  # Number of desired pods
+  replicas: 1
   selector:
     matchLabels:
-      app: flask_ml
+      app: flask-ml  # Changed from flask_ml to flask-ml
   template:
     metadata:
       labels:
-        app: flask_ml
+        app: flask-ml  # Changed from flask_ml to flask-ml
     spec:
       containers:
-        - name: flask_ml
-          image: shivam424/flask:latest  # Your Docker image
+        - name: flask-ml  # Changed from flask_ml to flask-ml
+          image: shivam424/flask:latest
           env:
-            - name: FLASK_APP_HOSTNAME  # Changed to a more descriptive name
+            - name: FLASK_APP_HOSTNAME
               value: "flask-ml"
           ports:
-            - containerPort: 5000  # Port that your application listens on
+            - containerPort: 5000
           resources:
             requests:
               memory: "128Mi"
@@ -31,11 +31,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask_ml
+  name: flask-ml  # Changed from flask_ml to flask-ml
 spec:
   type: NodePort
   ports:
     - port: 5000
       targetPort: 5000
   selector:
-    app: flask_ml
+    app: flask-ml  # Changed from flask_ml to flask-ml
