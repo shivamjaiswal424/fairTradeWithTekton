@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-ml
+  name: flask_ml
 spec:
   replicas: 1  # Number of desired pods
   selector:
     matchLabels:
-      app: flask-ml
+      app: flask_ml
   template:
     metadata:
       labels:
-        app: flask-ml
+        app: flask_ml
     spec:
       containers:
-        - name: flask-ml
+        - name: flask_ml
           image: shivam424/flask:latest  # Your Docker image
           ports:
             - containerPort: 5000  # Port that your application listens on
@@ -28,11 +28,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-ml
+  name: flask_ml
 spec:
   type: NodePort
   ports:
     - port: 5000
       targetPort: 5000
   selector:
-    app: flask-ml
+    app: flask_ml
