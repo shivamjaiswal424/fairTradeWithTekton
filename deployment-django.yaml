@@ -17,9 +17,6 @@ spec:
           image: shivam424/django:latest  # Your Docker image
           ports:
             - containerPort: 8000  # Port that your application listens on
-          env:
-            - name: DJANGO_SETTINGS_MODULE
-              value: "your_project.settings"  # Set environment variable for Django
           resources:
             requests:
               memory: "128Mi"

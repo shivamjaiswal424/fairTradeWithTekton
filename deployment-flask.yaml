@@ -17,9 +17,6 @@ spec:
           image: shivam424/flask:latest  # Your Docker image
           ports:
             - containerPort: 5000  # Port that your application listens on
-          env:
-            - name: FLASK_ENV
-              value: "production"  # Set environment variable for Flask
           resources:
             requests:
               memory: "128Mi"

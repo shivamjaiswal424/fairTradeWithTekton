@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: clone-task
+spec:
+  workspaces:
+    - name: shared-workspace
+  steps:
+    - name: check-and-clone
+      image: alpine/git  # Use the alpine/git image for this step
+      script: |
+        if [ -d "/workspace/shared-workspace" ] && [ "$(ls -A /workspace/shared-workspace)" ]; then
+          echo "Workspace already exists and is not empty. Skipping cleanup."
+        else
+          echo "Cleaning up workspace..."
+          rm -rf /workspace/shared-workspace/*
+        fi
+        echo "Cloning repository..."
+        git clone https://github.com/shivamjaiswal424/fairTradeWithTekton.git /workspace/shared-workspace
