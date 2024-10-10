@@ -5,13 +5,15 @@ kubectl delete task deploy-django-task
 kubectl delete task deploy-flask-ml-task
 kubectl delete pvc sqlite-pvc
 
+kubectl delete service django
+kubectl delete service flask-ml
+kubectl delete deployment django
+kubectl delete deployment flask-ml
+
 kubectl apply -f pvc.yaml
 kubectl apply -f clone-task.yaml
 kubectl apply -f deploy-django-task.yaml
 kubectl apply -f deploy-flask-task.yaml
-
-
-
 kubectl apply -f fairtrade-pipeline.yaml
 kubectl apply -f fairtrade-pipelinerun.yaml
 
