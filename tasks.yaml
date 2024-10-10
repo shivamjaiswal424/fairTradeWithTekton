@@ -18,6 +18,13 @@ kubectl apply -f fairtrade-pipeline.yaml
 kubectl apply -f fairtrade-pipelinerun.yaml
 
 
+kubectl delete task prometheus-metrics-task  
+kubectl apply -f prometheus-metrics-task.yaml  # New task
+kubectl apply -f service-monitor.yaml  # If you have a ServiceMonitor
+
+kubectl port-forward service/django 8000:8000
+kubectl port-forward service/flask-ml 5000:5000
+
 tkn pipelinerun describe fairtrade-pipelinerun
 
 tkn pipelinerun logs fairtrade-pipelinerun
@@ -30,8 +37,7 @@ minikube ssh -- docker system prune
 
 kubectl get tasks
 
-kubectl port-forward service/django 8000:8000
-kubectl port-forward service/flask-ml 5000:5000
+
 
 
 

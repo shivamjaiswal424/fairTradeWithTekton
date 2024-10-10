@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 15s # Scrape every 15 seconds
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'django'
+    static_configs:
+      - targets: ['django-service:8000']  # Replace with your actual service name and port
+
+scrape_configs:
+  - job_name: 'flask-ml'
+    static_configs:
+      - targets: ['flask-ml-service:5000']
