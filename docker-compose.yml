@@ -1,14 +1,12 @@
-version: '3.8'
 
 services:
-  flask_ml:
-    container_name: flask_ml
+  flask-ml:
+    container_name: flask-ml
     image: shivam424/flask:latest
     ports:
       - "5001:5000"
     networks:
       - app_network
-    platform: linux/amd64
 
   django:
     container_name: django
@@ -18,10 +16,9 @@ services:
     volumes:
       - sqlite_data:/data
     depends_on:
-      - flask_ml
+      - flask-ml
     networks:
       - app_network
-    platform: linux/amd64
 
 networks:
   app_network:
