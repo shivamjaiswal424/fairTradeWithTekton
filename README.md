@@ -16,30 +16,20 @@ The pipeline consists of the following stages:
 4. Tekton Tasks and Pipeline
 5. Clone Task
 
-### This task checks if the workspace is empty and clones the FairTradeWithTekton repository from GitHub.
-
-kubectl apply -f clone-task.yaml
+### Clone Repo Task
+This task checks if the workspace is empty and clones the FairTradeWithTekton repository from GitHub.
 
 ### Deploy Django Task
 This task deploys the Django app using the Kubernetes deployment YAML.
 
-
-kubectl apply -f deploy-django-task.yaml
-
 ### Deploy Flask-ML Task
 This task deploys the Flask ML application using the Kubernetes deployment YAML.
-
-kubectl apply -f deploy-flask-task.yaml
 
 ### Pipeline Definition
 The pipeline defines the sequence of tasks to clone the repository, deploy the Flask-ML app, and then deploy the Django app.
 
-kubectl apply -f fairtrade-pipeline.yaml
-
 ### PipelineRun
 The PipelineRun is responsible for executing the pipeline. It uses a Persistent Volume Claim (PVC) to share data between tasks.
-
-kubectl apply -f fairtrade-pipelinerun.yaml
 
 ## Steps to Run
 
