@@ -2,24 +2,26 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   namespace: default
-  name: deployer
+  name: tekton-task-role
 rules:
+  - apiGroups: [""]
+    resources: ["services", "pods", "pods/log", "configmaps", "events"]
+    verbs: ["get", "list", "watch", "create", "delete", "patch", "update"]
   - apiGroups: ["apps"]
-    resources: ["deployments", "deployments/scale"]
-    verbs: ["get", "list", "create", "update", "patch", "delete"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch", "create", "delete", "patch", "update"]
 
 ---
-
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: deployer-binding
+  name: tekton-task-binding
   namespace: default
 subjects:
   - kind: ServiceAccount
-    name: default
+    name: default 
     namespace: default
 roleRef:
   kind: Role
-  name: deployer
+  name: tekton-task-role
   apiGroup: rbac.authorization.k8s.io
