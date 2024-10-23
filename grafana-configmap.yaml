@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+data:
+  grafana.yml: |
+    [server]
+    http_port = 3000
+    domain = localhost
+
+    [auth]
+    enabled = true
+
+    [database]
+    type = sqlite3
+    path = grafana.db
+
+    [log]
+    mode = console
+    level = info
+
+    [analytics]
+    check_for_updates = true

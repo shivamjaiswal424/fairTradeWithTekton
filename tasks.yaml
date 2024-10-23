@@ -7,9 +7,13 @@ kubectl delete -f fairtrade-pipeline.yaml
 kubectl delete -f fairtrade-pipelinerun.yaml
 kubectl delete -f pvc.yaml
 kubectl delete -f prometheus-config.yaml
-kubectl delete -f prometheus-pvc.yaml
 kubectl delete -f run-prometheus.yaml
 kubectl delete -f prometheus-service.yaml
+kubectl delete -f prometheus-pvc.yaml
+kubectl delete -f grafana-configmap.yaml
+kubectl delete -f grafana-service.yaml
+kubectl delete -f grafana-task.yaml
+kubectl delete -f grafana-pvc.yaml
 
 kubectl delete service django
 kubectl delete service flask-ml
@@ -25,15 +29,24 @@ kubectl apply -f build-and-push-django-task.yaml
 kubectl apply -f build-and-push-flask-ml-task.yaml
 kubectl apply -f deploy-django-task.yaml
 kubectl apply -f deploy-flask-task.yaml
+kubectl apply -f prometheus-service.yaml
+kubectl apply -f grafana-pvc.yaml
+kubectl apply -f grafana-configmap.yaml
+kubectl apply -f grafana-task.yaml
+kubectl apply -f grafana-service.yaml
 kubectl apply -f fairtrade-pipeline.yaml
 kubectl apply -f fairtrade-pipelinerun.yaml
-kubectl apply -f prometheus-service.yaml
 
 
 kubectl port-forward service/django 8000:8000
 kubectl port-forward service/flask-ml 5000:5000
-kubectl port-forward svc/prometheus-service 9090:9090
 
+minikube service prometheus-service
+minikube service grafana-service
+
+http://prometheus-service:9090
+
+kubectl port-forward svc/prometheus-service 9090:9090
 tkn pipelinerun describe fairtrade-pipelinerun
 
 tkn pipelinerun logs fairtrade-pipelinerun

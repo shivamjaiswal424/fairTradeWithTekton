@@ -5,6 +5,9 @@ metadata:
 spec:
   workspaces:
     - name: shared-workspace
+    - name: prometheus-storage  # For Prometheus
+    - name: grafana-storage     # For Grafana
+
   tasks:
     # Step 1: Clone the repo
     - name: clone-repo
@@ -53,7 +56,7 @@ spec:
         - name: source
           workspace: shared-workspace
 
-    # Step 6: Run Prometheus Task
+    # Step 6: Run Prometheus
     - name: run-prometheus
       taskRef:
         name: run-prometheus
@@ -62,4 +65,15 @@ spec:
         - deploy-flask-ml
       workspaces:
         - name: prometheus-storage
-          workspace: shared-workspace
+          workspace: prometheus-storage
+
+    # Step 7: Run Grafana (new task)
+    - name: run-grafana
+      taskRef:
+        name: run-grafana
+      runAfter:
+        - deploy-django
+        - deploy-flask-ml
+      workspaces:
+        - name: grafana-storage
+          workspace: grafana-storage

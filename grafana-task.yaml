@@ -1,0 +1,41 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: run-grafana
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/categories: Monitoring
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: grafana
+    tekton.dev/displayName: "Run Grafana"
+spec:
+  description: >-
+    A task that sets up and runs a Grafana server with a custom configuration.
+
+  workspaces:
+    - name: grafana-storage
+      description: "Workspace for Grafana data"
+
+  steps:
+    - name: setup-grafana
+      image: grafana/grafana:latest
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "Starting Grafana..."
+          # Check if grafana.ini exists, remove it if it does
+          if [ -f /etc/grafana/grafana.ini ]; then
+            rm /etc/grafana/grafana.ini
+          fi
+          # Copy custom configuration
+          cp /mnt/grafana-config/grafana.yml /etc/grafana/grafana.ini
+          # Start Grafana using the new command
+          grafana server --config /etc/grafana/grafana.ini
+      volumeMounts:
+        - mountPath: /mnt/grafana-config
+          name: grafana-config-volume
+  volumes:
+    - name: grafana-config-volume
+      configMap:
+        name: grafana-config

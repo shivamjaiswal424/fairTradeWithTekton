@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: prometheus-service
+  name: grafana-service
   namespace: default
 spec:
   selector:
     app.kubernetes.io/managed-by: tekton-pipelines  # Adjust to match your pod's labels
   ports:
     - protocol: TCP
-      port: 9090       # Port to access the service
-      targetPort: 9090  # Port on the Prometheus pod
-  type: NodePort
+      port: 3000       # Port to access Grafana
+      targetPort: 3000  # Port on the Grafana pod
+  type: ClusterIP

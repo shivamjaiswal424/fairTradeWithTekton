@@ -12,3 +12,6 @@ spec:
     - name: prometheus-storage
       persistentVolumeClaim:
         claimName: prometheus-pvc
+    - name: grafana-storage
+      persistentVolumeClaim:
+        claimName: grafana-pvc  # Ensure this links to your Grafana PVC
