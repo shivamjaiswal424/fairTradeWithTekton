@@ -16,7 +16,3 @@ data:
       - job_name: 'django-app'
         static_configs:
           - targets: ['django:8000']  # Django service
-
-      - job_name: 'flask-ml-app'
-        static_configs:
-          - targets: ['flask-ml:5000']  # Flask-ML service

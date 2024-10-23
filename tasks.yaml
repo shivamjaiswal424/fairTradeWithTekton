@@ -57,10 +57,6 @@ docker system prune -a
 
 minikube ssh -- docker system prune
 
-kubectl get tasks
-
-docker-compose up -d
-
 
 repayment_score_requests_total
 app_health_status
