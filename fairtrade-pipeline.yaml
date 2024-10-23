@@ -6,26 +6,60 @@ spec:
   workspaces:
     - name: shared-workspace
   tasks:
+    # Step 1: Clone the repo
     - name: clone-repo
       taskRef:
         name: clone-task
       workspaces:
         - name: shared-workspace
 
-    - name: deploy-flask-ml
+    # Step 2: Build and push Django Docker image
+    - name: build-and-push-django
       taskRef:
-        name: deploy-flask-ml-task
+        name: build-and-push-django-task
       runAfter:
-        - clone-repo  # Run after cloning the repo
+        - clone-repo
       workspaces:
         - name: source
           workspace: shared-workspace
 
+    # Step 3: Build and push Flask-ML Docker image
+    - name: build-and-push-flask-ml
+      taskRef:
+        name: build-and-push-flask-ml-task
+      runAfter:
+        - clone-repo
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+
+    # Step 4: Deploy Django
     - name: deploy-django
       taskRef:
         name: deploy-django-task
-      runAfter: 
-        - deploy-flask-ml  # Django runs after Flask-ML
+      runAfter:
+        - build-and-push-django
       workspaces:
         - name: source
+          workspace: shared-workspace
+
+    # Step 5: Deploy Flask-ML
+    - name: deploy-flask-ml
+      taskRef:
+        name: deploy-flask-ml-task
+      runAfter:
+        - build-and-push-flask-ml
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+
+    # Step 6: Run Prometheus Task
+    - name: run-prometheus
+      taskRef:
+        name: run-prometheus
+      runAfter:
+        - deploy-django
+        - deploy-flask-ml
+      workspaces:
+        - name: prometheus-storage
           workspace: shared-workspace

@@ -6,14 +6,12 @@ spec:
   workspaces:
     - name: shared-workspace
   steps:
-    - name: check-and-clone
-      image: alpine/git  # Use the alpine/git image for this step
+    - name: clone-repo
+      image: alpine/git
       script: |
         if [ -d "/workspace/shared-workspace" ] && [ "$(ls -A /workspace/shared-workspace)" ]; then
-          echo "Workspace already exists and is not empty. Skipping cleanup."
+          echo "Workspace is not empty. Skipping clone."
         else
-          echo "Cleaning up workspace..."
-          rm -rf /workspace/shared-workspace/*
+          echo "Cloning repository..."
+          git clone https://github.com/shivamjaiswal424/yFairtrade.git /workspace/shared-workspace
         fi
-        echo "Cloning repository..."
-        git clone https://github.com/shivamjaiswal424/fairTradeWithTekton.git /workspace/shared-workspace

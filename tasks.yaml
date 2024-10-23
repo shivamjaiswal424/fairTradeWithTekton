@@ -1,9 +1,15 @@
-kubectl delete pipeline fairtrade-pipeline
-kubectl delete pipelinerun fairtrade-pipelinerun
-kubectl delete task clone-task
-kubectl delete task deploy-django-task
-kubectl delete task deploy-flask-ml-task
-kubectl delete pvc sqlite-pvc
+kubectl delete -f clone-task.yaml
+kubectl delete -f build-and-push-django-task.yaml
+kubectl delete -f build-and-push-flask-ml-task.yaml
+kubectl delete -f deploy-django-task.yaml
+kubectl delete -f deploy-flask-task.yaml
+kubectl delete -f fairtrade-pipeline.yaml
+kubectl delete -f fairtrade-pipelinerun.yaml
+kubectl delete -f pvc.yaml
+kubectl delete -f prometheus-config.yaml
+kubectl delete -f prometheus-pvc.yaml
+kubectl delete -f run-prometheus.yaml
+kubectl delete -f prometheus-service.yaml
 
 kubectl delete service django
 kubectl delete service flask-ml
@@ -11,15 +17,22 @@ kubectl delete deployment django
 kubectl delete deployment flask-ml
 
 kubectl apply -f pvc.yaml
+kubectl apply -f prometheus-config.yaml
+kubectl apply -f prometheus-pvc.yaml
+kubectl apply -f run-prometheus.yaml
 kubectl apply -f clone-task.yaml
+kubectl apply -f build-and-push-django-task.yaml
+kubectl apply -f build-and-push-flask-ml-task.yaml
 kubectl apply -f deploy-django-task.yaml
 kubectl apply -f deploy-flask-task.yaml
 kubectl apply -f fairtrade-pipeline.yaml
 kubectl apply -f fairtrade-pipelinerun.yaml
+kubectl apply -f prometheus-service.yaml
 
 
 kubectl port-forward service/django 8000:8000
 kubectl port-forward service/flask-ml 5000:5000
+kubectl port-forward svc/prometheus-service 9090:9090
 
 tkn pipelinerun describe fairtrade-pipelinerun
 
@@ -36,3 +49,6 @@ kubectl get tasks
 docker-compose up -d
 
 
+repayment_score_requests_total
+app_health_status
+python_gc_objects_collected_total

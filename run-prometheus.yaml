@@ -1,0 +1,37 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: run-prometheus
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/categories: Monitoring
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: prometheus
+    tekton.dev/displayName: "Run Prometheus"
+spec:
+  description: >-
+    A task that sets up and runs a Prometheus monitoring server.
+
+  workspaces:
+    - name: prometheus-storage
+      description: "Workspace for Prometheus data"
+      optional: false
+
+  steps:
+    # Step to set up and run Prometheus
+    - name: setup-prometheus
+      image: prom/prometheus:latest
+      volumeMounts:
+        - name: prometheus-config-volume  # Mount the ConfigMap with prometheus.yml
+          mountPath: /etc/prometheus/
+      command: ["sh", "-c"]
+      args:
+        - |
+          echo "Starting Prometheus..."
+          prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/workspace/prometheus-storage/data
+
+  volumes:
+    - name: prometheus-config-volume  # The volume that mounts the ConfigMap
+      configMap:
+        name: prometheus-config  # The ConfigMap that contains prometheus.yml

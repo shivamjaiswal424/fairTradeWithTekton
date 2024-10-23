@@ -9,3 +9,6 @@ spec:
     - name: shared-workspace
       persistentVolumeClaim:
         claimName: sqlite-pvc
+    - name: prometheus-storage
+      persistentVolumeClaim:
+        claimName: prometheus-pvc
