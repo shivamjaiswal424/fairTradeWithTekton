@@ -7,6 +7,7 @@ spec:
     - name: shared-workspace
     - name: prometheus-storage  # For Prometheus
     - name: grafana-storage     # For Grafana
+    - name: docker-config
 
   tasks:
     # Step 1: Clone the repo
@@ -25,6 +26,8 @@ spec:
       workspaces:
         - name: source
           workspace: shared-workspace
+        - name: docker-config
+          workspace: docker-config
 
     # Step 3: Build and push Flask-ML Docker image
     - name: build-and-push-flask-ml
@@ -35,6 +38,8 @@ spec:
       workspaces:
         - name: source
           workspace: shared-workspace
+        - name: docker-config
+          workspace: docker-config
 
     # Step 4: Deploy Django
     - name: deploy-django

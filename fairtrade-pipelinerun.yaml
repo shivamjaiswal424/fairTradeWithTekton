@@ -15,3 +15,6 @@ spec:
     - name: grafana-storage
       persistentVolumeClaim:
         claimName: grafana-pvc  # Ensure this links to your Grafana PVC
+    - name: docker-config
+      secret:
+        secretName: my-registry-secret
