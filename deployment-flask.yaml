@@ -19,7 +19,7 @@ spec:
             - name: FLASK_APP_HOSTNAME
               value: "flask-ml"
           ports:
-            - containerPort: 5000
+            - containerPort: 5000 #port number
           resources:
             requests:
               memory: "128Mi"

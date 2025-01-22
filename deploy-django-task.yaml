@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: deploy-django-task
+  name: deploy-django-task #for django
 spec:
   workspaces:
     - name: source

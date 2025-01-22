@@ -19,7 +19,6 @@ spec:
       optional: false
 
   steps:
-    # Step to set up and run Prometheus
     - name: setup-prometheus
       image: prom/prometheus:latest
       volumeMounts:

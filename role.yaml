@@ -5,7 +5,7 @@ metadata:
   name: tekton-task-role
 rules:
   - apiGroups: [""]
-    resources: ["services", "pods", "pods/log", "configmaps", "events"]
+    resources: ["services", "pods", "pods/log", "configmaps", "events"] #resources to use
     verbs: ["get", "list", "watch", "create", "delete", "patch", "update"]
   - apiGroups: ["apps"]
     resources: ["deployments"]

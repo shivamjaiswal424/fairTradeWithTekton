@@ -40,13 +40,11 @@ kubectl apply -f fairtrade-pipelinerun.yaml
 
 kubectl port-forward service/django 8000:8000
 kubectl port-forward service/flask-ml 5000:5000
-
 minikube service prometheus-service
 minikube service grafana-service
-
 http://prometheus-service:9090
 
-kubectl port-forward svc/prometheus-service 9090:9090
+
 tkn pipelinerun describe fairtrade-pipelinerun
 
 tkn pipelinerun logs fairtrade-pipelinerun

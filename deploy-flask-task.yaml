@@ -4,7 +4,7 @@ metadata:
   name: deploy-flask-ml-task
 spec:
   workspaces:
-    - name: source  # Reference to workspace
+    - name: source  
   steps:
     - name: deploy-flask-ml
       image: bitnami/kubectl:latest

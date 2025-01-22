@@ -11,7 +11,7 @@ metadata:
     tekton.dev/displayName: "Run Grafana"
 spec:
   description: >-
-    A task that sets up and runs a Grafana server with a custom configuration.
+    A task that sets up and runs a Grafana server with a custom configuration based on need.
 
   workspaces:
     - name: grafana-storage

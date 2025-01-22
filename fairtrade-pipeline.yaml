@@ -5,8 +5,8 @@ metadata:
 spec:
   workspaces:
     - name: shared-workspace
-    - name: prometheus-storage  # For Prometheus
-    - name: grafana-storage     # For Grafana
+    - name: prometheus-storage  
+    - name: grafana-storage     
     - name: docker-config
 
   tasks:

@@ -5,7 +5,7 @@ metadata:
 spec:
   workspaces:
     - name: source
-    - name: docker-config  # Docker config workspace
+    - name: docker-config  
   volumes:
     - name: docker-config
       secret:

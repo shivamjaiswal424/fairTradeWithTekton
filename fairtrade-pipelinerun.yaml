@@ -14,7 +14,7 @@ spec:
         claimName: prometheus-pvc
     - name: grafana-storage
       persistentVolumeClaim:
-        claimName: grafana-pvc  # Ensure this links to your Grafana PVC
+        claimName: grafana-pvc  
     - name: docker-config
       secret:
         secretName: my-registry-secret

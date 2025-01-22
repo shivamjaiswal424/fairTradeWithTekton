@@ -4,7 +4,7 @@ This project demonstrates a Tekton-based CI/CD pipeline that deploys two applica
 ## Prerequisites
 1. Kubernetes cluster
 2. Tekton installed
-3. kubectl configured to access your cluster
+3. kubectl configured to access cluster
 
 ## Pipeline Overview
 

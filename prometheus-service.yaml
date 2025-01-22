@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   selector:
-    app.kubernetes.io/managed-by: tekton-pipelines  # Adjust to match your pod's labels
+    app.kubernetes.io/managed-by: tekton-pipelines  
   ports:
     - protocol: TCP
       port: 9090       # Port to access the service

@@ -16,7 +16,7 @@ spec:
       args:
         - --dockerfile=/workspace/source/dockerFileRepayment
         - --context=/workspace/source
-        - --destination=shivam424/flask:latest  # Change to your actual registry URL
+        - --destination=shivam424/flask:latest  
       volumeMounts:
         - name: docker-config
           mountPath: /kaniko/.docker/config.json

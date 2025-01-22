@@ -16,7 +16,7 @@ spec:
         - name: django
           image: shivam424/django:latest  # Docker image
           ports:
-            - containerPort: 8000  # Port that application listens on
+            - containerPort: 8000  
           resources:
             requests:
               memory: "128Mi"
