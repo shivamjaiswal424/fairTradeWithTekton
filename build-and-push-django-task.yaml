@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-and-push-django-task
+spec:
+  workspaces:
+    - name: source
+    - name: docker-config  
+  volumes:
+    - name: docker-config
+      secret:
+        secretName: my-registry-secret
+  steps:
+    - name: build-django
+      image: gcr.io/kaniko-project/executor:latest
+      args:
+        - --dockerfile=/workspace/source/dockerFileApp
+        - --context=/workspace/source
+        - --destination=shivam424/django:latest  # Change to your actual registry URL
+      volumeMounts:
+        - name: docker-config
+          mountPath: /kaniko/.docker/config.json
+          subPath: .dockerconfigjson  # Mount secret as .docker/config.json

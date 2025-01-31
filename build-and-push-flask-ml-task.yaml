@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-and-push-flask-ml-task
+spec:
+  workspaces:
+    - name: source
+    - name: docker-config
+  volumes:
+    - name: docker-config
+      secret:
+        secretName: my-registry-secret
+  steps:
+    - name: build-flask-ml
+      image: gcr.io/kaniko-project/executor:latest
+      args:
+        - --dockerfile=/workspace/source/dockerFileRepayment
+        - --context=/workspace/source
+        - --destination=shivam424/flask:latest  
+      volumeMounts:
+        - name: docker-config
+          mountPath: /kaniko/.docker/config.json
+          subPath: .dockerconfigjson  # Mount the secret as .docker/config.json

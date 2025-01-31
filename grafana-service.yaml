@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-service
+  namespace: default
+spec:
+  selector:
+    app.kubernetes.io/managed-by: tekton-pipelines  
+  ports:
+    - protocol: TCP
+      port: 3000       # Port to access Grafana
+      targetPort: 3000  # Port on the Grafana pod
+  type: ClusterIP

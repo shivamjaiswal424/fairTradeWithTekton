@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: fairtrade-pipelinerun
+spec:
+  pipelineRef:
+    name: fairtrade-pipeline
+  workspaces:
+    - name: shared-workspace
+      persistentVolumeClaim:
+        claimName: sqlite-pvc
+    - name: prometheus-storage
+      persistentVolumeClaim:
+        claimName: prometheus-pvc
+    - name: grafana-storage
+      persistentVolumeClaim:
+        claimName: grafana-pvc  
+    - name: docker-config
+      secret:
+        secretName: my-registry-secret
